@@ -81,7 +81,7 @@ int main() {
 
     floor(logb(n) + 1)
 
-    // MAXIMUM SUBARRAY - KADANE'S
+    // MAXIMUM SUBARRAY - KADANE'S - O(n)
 
     vector<int> a(n) = {...};
     int best = 0, sum = 0; // best = INT_MIN
@@ -91,7 +91,121 @@ int main() {
     }
     cout << best << '\n';
 
+    /************************************************************************************************************************************************************************************************************************************************/
 
+    // BUBBLE SORT - O(n^2)
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; i < n - 1; j++) {
+            if (a[j] > a[j + 1]) {
+                swap(a[j], a[j + 1]);
+            }
+        }
+    }
+
+    // COUNTING SORT - O(n)
+
+    vector<int> a(n, 0);
+    for (int i = 0; i < n; i++) { // All input belongs to [0, n - 1]
+        int index;
+        cin >> index;
+        a[index]++;
+    }
+    for (int i = 0; i < n; i++) {
+        if (a[i]) {
+            while (a[i]--) {
+                cout << i << ' ';
+            }
+        }
+    }
+    cout << '\n';
+
+    /************************************************************************************************************************************************************************************************************************************************/
+
+    // SORTING IN C++ USING STL
+
+    vector<int> v = {4, 2, 5, 3, 5, 8, 3};
+    sort(v.begin(), v.end());
+
+    int a[n] = {1, 9, 7, 2, 0, -7};
+    sort(a, a + n);
+
+    string s = "monkey";
+    sort(s.begin(), s.end());
+
+    vector<pair<int, int>> v;
+    v.push_back({1, 5});
+    v.push_back({2, 3});
+    v.push_back({1, 2});
+    sort(v.begin(), v.end());
+
+    vector<tuple<int, int, int>> v;
+    v.push_back({2, 1, 4});
+    v.push_back({1, 5, 3});
+    v.push_back({2, 1, 3});
+    sort(v.begin(), v.end());
+
+    // REVERSE SORTING IN C++ USING STL
+
+    vector<int> v = {4, 2, 5, 3, 5, 8, 3};
+    sort(v.rbegin(), v.rend());
+
+    /************************************************************************************************************************************************************************************************************************************************/
+
+    // COMPARISON OPERATOR FOR USER-DEFINED STRUCT
+
+    struct P {
+        int x, y;
+        bool operator<(const P &p) {
+            if (x != p.x) return x < p.x; // return true for the sorting you want
+            return y < p.y;
+        }
+    };
+
+    /************************************************************************************************************************************************************************************************************************************************/
+
+    // SORT USING USER DEFINED COMPARATOR FUNCTION
+
+    bool comp(string a, string b) {
+        if (a.size() != b.size()) return a.size() < b.size(); // sort by length
+        return a < b; // sort by alphabet
+    }
+
+    sort(s.begin(), s.end(), comp);
+
+    /************************************************************************************************************************************************************************************************************************************************/
+
+    // SEARCH AN ELEMENT IN ARRAY - O(n)
+
+    for (int i = 0; i < n; i++) {
+        if (a[i] == x) {
+            // x found at index i
+        }
+    }
+
+    // BINARY SEARCH - SEARCH IN SORTED ARRAY - O(log n)
+
+    // METHOD 1
+
+    int a = 0, b = n - 1;
+    while (a <= b) {
+        int k = (a + b) / 2;
+        if (a[k] == x) {
+            // x found at index k
+        }
+        if (a[k] > x) b = k - 1;
+        else a = k + 1;
+    }
+
+    // METHOD 2 - EFFICIENT
+
+    int k = 0;
+    for (int i = n / 2; i >= 1; i /= 2) {
+        while (k + b < n && a[k + b] <= x) k += b;
+    }
+    if (a[k] == x) {
+        //x found at index k
+    }
 }
 
 /*
